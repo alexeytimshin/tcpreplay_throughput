@@ -18,7 +18,7 @@ read -p "С каким шагом (Мбит/с) выполнять прогон:
 while [ $min -le $max ]
 do
 rx_packets=$(ssh root@10.52.1.217 'ifconfig eth2 | grep "RX packets"' | awk '{print $3}')
-tcpreplay -i enp3s0 -M $min ./$final_pcap
+tcpreplay -i enp3s0 -l 10 -M $min ./$final_pcap
 sleep 10
 rx_packets_after=$(ssh root@10.52.1.217 'ifconfig eth2 | grep "RX packets"' | awk '{print $3}')
 itog=$(expr $rx_packets_after - $rx_packets)
